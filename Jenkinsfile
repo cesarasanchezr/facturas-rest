@@ -4,19 +4,19 @@ pipeline {
 
         stage("Descargar código de la aplicación"){
             steps{
-                git "url"
+                git "https://github.com/cesarasanchezr/facturas-rest.git"
             } 
         }        
 
         stage("Creación de imagen"){
             steps{
-                sh "docker build -t jsalinas/app1 ."
+                sh "docker build -t cesar.a.sanchez/facturas-node-16 ."
             } 
         }
 
        stage("Ejecución de contenedor"){
            steps {
-               sh "docker run -d --name app1 -p 8081:8080 jsalinas/app1"
+               sh "docker run -d --name facturas-node -p 8081:8080 cesar.a.sanchez/facturas-node-16"
            }
            
         }
@@ -29,8 +29,8 @@ pipeline {
 
         stage("Cerrar recursos"){
            steps {
-                sh "docker stop app1"
-                sh "docker container rm app1" 
+                sh "docker stop facturas-node"
+                sh "docker container rm facturas-node" 
             }            
         }
     }
